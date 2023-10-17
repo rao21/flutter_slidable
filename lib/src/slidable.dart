@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/src/auto_close_behavior.dart';
 import 'package:flutter_slidable/src/notifications_old.dart';
@@ -27,6 +28,8 @@ class Slidable extends StatefulWidget {
     this.direction = Axis.horizontal,
     this.dragStartBehavior = DragStartBehavior.down,
     this.useTextDirection = true,
+    required this.endActionCardColor,
+    required this.startActionCardColor,
     required this.child,
   }) : super(key: key);
 
@@ -36,6 +39,8 @@ class Slidable extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool enabled;
+  final Color startActionCardColor;
+  final Color endActionCardColor;
 
   /// Specifies to close this [Slidable] after the closest [Scrollable]'s
   /// position changed.
@@ -204,9 +209,21 @@ class _SlidableState extends State<Slidable>
   Widget? get actionPane {
     switch (controller.actionPaneType.value) {
       case ActionPaneType.start:
-        return startActionPane;
+        return Card(
+            color: widget.startActionCardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              //set border radius more than 50% of height and width to make circle
+            ),
+            child: startActionPane);
       case ActionPaneType.end:
-        return endActionPane;
+        return Card(
+            color: widget.endActionCardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              //set border radius more than 50% of height and width to make circle
+            ),
+            child: endActionPane);
       default:
         return null;
     }
