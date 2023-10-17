@@ -209,21 +209,27 @@ class _SlidableState extends State<Slidable>
   Widget? get actionPane {
     switch (controller.actionPaneType.value) {
       case ActionPaneType.start:
-        return Card(
-            color: widget.startActionCardColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-              //set border radius more than 50% of height and width to make circle
-            ),
-            child: startActionPane);
+        return SizedBox(
+          height: 66,
+          child: Card(
+              color: widget.startActionCardColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                //set border radius more than 50% of height and width to make circle
+              ),
+              child: startActionPane),
+        );
       case ActionPaneType.end:
-        return Card(
-            color: widget.endActionCardColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-              //set border radius more than 50% of height and width to make circle
-            ),
-            child: endActionPane);
+        return SizedBox(
+          height: 66,
+          child: Card(
+              color: widget.endActionCardColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                //set border radius more than 50% of height and width to make circle
+              ),
+              child: endActionPane),
+        );
       default:
         return null;
     }
