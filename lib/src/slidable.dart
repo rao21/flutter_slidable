@@ -31,6 +31,7 @@ class Slidable extends StatefulWidget {
     required this.endActionCardColor,
     required this.startActionCardColor,
     required this.child,
+    this.slidableHeight = 66,
   }) : super(key: key);
 
   /// Whether this slidable is interactive.
@@ -83,6 +84,7 @@ class Slidable extends StatefulWidget {
   /// when the users drags to the reading direction (and in the inverse of the
   /// reading direction for [endActionPane]).
   final bool useTextDirection;
+  final double slidableHeight;
 
   /// Determines the way that drag start behavior is handled.
   ///
@@ -210,26 +212,31 @@ class _SlidableState extends State<Slidable>
     switch (controller.actionPaneType.value) {
       case ActionPaneType.start:
         return SizedBox(
-          height: 66,
-          child: Card(
-              color: widget.startActionCardColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                //set border radius more than 50% of height and width to make circle
-              ),
+          height: widget.slidableHeight,
+          child: Container(
+              height: widget.slidableHeight,
+              decoration: BoxDecoration(
+                  color: widget.startActionCardColor,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                  border: Border.all(
+                      color: Theme.of(context).colorScheme.onTertiaryContainer),
+                  boxShadow: []),
               child: startActionPane),
         );
       case ActionPaneType.end:
-        return SizedBox(
-          height: 66,
-          child: Card(
-              color: widget.endActionCardColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                //set border radius more than 50% of height and width to make circle
-              ),
-              child: endActionPane),
-        );
+        return Container(
+            height: widget.slidableHeight,
+            decoration: BoxDecoration(
+                color: widget.startActionCardColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                border: Border.all(
+                    color: Theme.of(context).colorScheme.onTertiaryContainer),
+                boxShadow: []),
+            child: endActionPane);
       default:
         return null;
     }
