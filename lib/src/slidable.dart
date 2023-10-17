@@ -229,7 +229,7 @@ class _SlidableState extends State<Slidable>
         return Container(
             height: widget.slidableHeight,
             decoration: BoxDecoration(
-                color: widget.startActionCardColor,
+                color: widget.endActionCardColor,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(8),
                 ),
@@ -268,10 +268,13 @@ class _SlidableState extends State<Slidable>
     );
 
     content = Stack(
+      //clipBehavior: Clip.antiAliasWithSaveLayer,
       children: <Widget>[
+        content,
         if (actionPane != null)
           Positioned.fill(
             child: ClipRect(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               clipper: _SlidableClipper(
                 axis: widget.direction,
                 controller: controller,
@@ -279,7 +282,6 @@ class _SlidableState extends State<Slidable>
               child: actionPane,
             ),
           ),
-        content,
       ],
     );
 
